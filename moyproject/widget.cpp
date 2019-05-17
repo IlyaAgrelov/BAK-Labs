@@ -44,8 +44,7 @@ void Widget::on_pushButton_clicked() //движение
 void Widget::on_pushButton_2_clicked() //отрисовка
 {
     Dialog* dialog = new Dialog();
-    dialog->exec();
-    if(dialog->text1 != "" and dialog->text2 != ""){
+    if(dialog->exec() == 1){
         scene->setSceneRect(0,0,ui->graphicsView->rect().width(),ui->graphicsView->rect().height());
         Spring *object = new Spring(dialog->text1.toDouble(), dialog->text2.toDouble());
         scene->addItem(object);
