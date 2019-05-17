@@ -64,6 +64,7 @@ void Widget2::on_pushButton_clicked()
         scene->addItem(body2);
         scene->addItem(body3);
         ui->graphicsView->update();
+        dialog->close();
     }
 }
 

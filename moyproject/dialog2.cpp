@@ -67,7 +67,7 @@ void dialog2::on_buttonBox_accepted()
         coordy = {ui->line1y->text().toDouble(), ui->line2y->text().toDouble(), ui->line3y->text().toDouble()};
         speedx = {ui->line1Vx->text().toDouble(), ui->line2Vx->text().toDouble(), ui->line3Vx->text().toDouble()};
         speedy = {ui->line1Vy->text().toDouble(), ui->line2Vy->text().toDouble(), ui->line3Vy->text().toDouble()};
-        this->close();
+        this->accept();
     }
 }
 
