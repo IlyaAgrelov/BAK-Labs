@@ -2,6 +2,7 @@
 #define DIALOG2_H
 
 #include <QDialog>
+#include <vector>
 
 namespace Ui {
 class dialog2;
@@ -13,28 +14,25 @@ class dialog2 : public QDialog
 
 public:
     explicit dialog2(QWidget *parent = nullptr);
+    std::vector<double> getmass();
+    std::vector<double> getcoordx();
+    std::vector<double> getcoordy();
+    std::vector<double> getspeedx();
+    std::vector<double> getspeedy();
     ~dialog2();
-    double m1;
-    double m2;
-    double m3;
-    double x1;
-    double x2;
-    double x3;
-    double y1;
-    double y2;
-    double y3;
-    double Vx1;
-    double Vx2;
-    double Vx3;
-    double Vy1;
-    double Vy2;
-    double Vy3;
 
 private slots:
     void on_buttonBox_accepted();
 
+    void on_buttonBox_rejected();
+
 private:
     Ui::dialog2 *ui;
+    std::vector<double> mass;
+    std::vector<double> coordx;
+    std::vector<double> coordy;
+    std::vector<double> speedx;
+    std::vector<double> speedy;
 };
 
 #endif // DIALOG2_H
