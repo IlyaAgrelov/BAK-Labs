@@ -6,6 +6,7 @@
 #include "body.h"
 #include <vector>
 #include <QList>
+#include "dialog2.h"
 
 namespace Ui {
 class Widget2;
