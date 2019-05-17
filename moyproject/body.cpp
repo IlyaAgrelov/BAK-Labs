@@ -41,6 +41,7 @@ Body::Body(double x1, double y1, double v1_1, double v2_1, double m1, QColor c){
     setPos(x - 10, y - 10);
     setRect(0,0,20,20);
     setBrush(QBrush(c));
+    setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 
