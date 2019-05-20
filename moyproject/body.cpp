@@ -41,6 +41,7 @@ Body::Body(double x1, double y1, double v1_1, double v2_1, double m1, QColor c){
     setPos(x - 10, y - 10);
     setRect(0,0,20,20);
     setBrush(QBrush(c));
+    setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 
@@ -59,15 +60,17 @@ Vector GravForce (Body& b1, Body& b2){
 }
 
 void Movement(Vector& R, Body& b){
-    Vector v, v_0, dv;
-    v_0 = b.GetSpeed();
-    dv = (1.0/b.mass()) * R;
-    v = v_0 + dv;
-    Vector r, r_0, dr;
-    r_0 = b.GetCoordinates();
-    dr = v;
-    r = r_0 + dr;
-    b.SetSpeed(v);
-    b.SetCoordinates(r);
-    return;
+    if(b.collidingItems().size() == 0){
+        Vector v, v_0, dv;
+        v_0 = b.GetSpeed();
+        dv = (1.0/b.mass()) * R;
+        v = v_0 + dv;
+        Vector r, r_0, dr;
+        r_0 = b.GetCoordinates();
+        dr = v;
+        r = r_0 + dr;
+        b.SetSpeed(v);
+        b.SetCoordinates(r);
+        return;
+    }
 }
