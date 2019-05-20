@@ -51,10 +51,10 @@ HEADERS += \
 
 FORMS += \
         widget.ui \
-    dialog.ui \
     mainwindow.ui \
     widget2.ui \
-    dialog2.ui
+    dialog2.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
