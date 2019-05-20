@@ -29,13 +29,13 @@ void Widget2::move(){
     F31 = GravForce(*bodies[0], *bodies[2]);
     F32 = GravForce(*bodies[1], *bodies[2]);
     Vector nul(0,0);
-    F12 = DisVector(nul, F21);
-    F13 = DisVector(nul, F31);
-    F23 = DisVector(nul, F32);
+    F12 = nul - F21;
+    F13 = nul - F31;
+    F23 = nul - F32;
     Vector R1, R2, R3; // равнодействующие сил
-    R1 = AddVector(F21, F31);
-    R2 = AddVector(F12, F32);
-    R3 = AddVector(F13, F23);
+    R1 = F21 + F31;
+    R2 = F12 + F32;
+    R3 = F13 + F23;
     Movement(R1, *bodies[0]);
     Movement(R2, *bodies[1]);
     Movement(R3, *bodies[2]);

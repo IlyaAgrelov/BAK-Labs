@@ -1,9 +1,13 @@
+
 #ifndef WIDGET_H
 #define WIDGET_H
 
 #include <QWidget>
 #include <QMouseEvent>
 #include <QGraphicsScene>
+#include <point.h>
+#include <spring.h>
+#include <vector>
 
 namespace Ui {
 class Widget;
@@ -25,6 +29,8 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
+    vector<Spring*> springs;
+    vector<Point*> points;
     Ui::Widget *ui;
     QGraphicsScene *scene;
     int amount;

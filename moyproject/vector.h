@@ -1,21 +1,25 @@
+
 #ifndef VECTOR_H
 #define VECTOR_H
-#include <iostream>
-#include <string>
 #include <cmath>
 
-
 struct Vector {
-    double x, y;
-
-    Vector(double u = 0, double v = 0);
+    double x, y, z;
+    Vector();
+    Vector(double g);
+    Vector(double u, double v);
     double Length();
-}; // структура "вектор"
+    double abs();
+};
 
-Vector AddVector(const Vector& v1, const Vector& v2);// сложение векторов
+Vector operator+(const Vector& v, const Vector& u);
 
-Vector DisVector(const Vector& v1, const Vector& v2);// вычитание векторов
+Vector operator-(const Vector& v, const Vector& u);
 
-Vector ScalProduct(double a, const Vector& v);// умножение на скаляр
+Vector operator*(const double& a, Vector& u);
+
+Vector operator/(Vector& u, const double& a);
+
+
 
 #endif // VECTOR_H

@@ -6,12 +6,12 @@
 class Load: public QGraphicsRectItem{
 
 public:
-    Load(double m);
+    Load();
 
-    double getm();
+    //double getm();
 
 private:
-    double m;
+    //double m;
 };
 
 
