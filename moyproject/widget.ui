@@ -453,7 +453,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>Пружины</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

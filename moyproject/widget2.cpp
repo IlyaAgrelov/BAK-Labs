@@ -87,10 +87,10 @@ void Widget2::on_pushButton_3_clicked()
 {
     for(auto&i : scene->items()){
         if(i->x() > this->width()){
-            this -> resize(i->x() + 50, this->height());
+            this -> resize(int(i->x() + 50), this->height());
         }
         if(i->y() > this->ui->graphicsView->height()){
-            this -> resize(this->width(), i->y() + 150);
+            this -> resize(this->width(), int(i->y() + 150));
         }
     }
 }
