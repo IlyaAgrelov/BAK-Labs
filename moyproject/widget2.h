@@ -34,6 +34,7 @@ private:
     Ui::Widget2 *ui;
     QGraphicsScene* scene;
     QList<Body*> bodies;
+    QTimer* timer;
 };
 
 #endif // WIDGET2_H

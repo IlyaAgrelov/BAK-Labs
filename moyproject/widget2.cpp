@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "dialog2.h"
 #include "vector.h"
+#include <QString>
 
 Widget2::Widget2(QWidget *parent) :
     QWidget(parent),
@@ -16,6 +17,13 @@ Widget2::Widget2(QWidget *parent) :
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing | QPainter::SmoothPixmapTransform);
+    timer = new QTimer();
+    ui->label1->setText("");
+    ui->label2->setText("");
+    ui->label3->setText("");
+    ui->label4->setText("");
+    ui->label5->setText("");
+    ui->label6->setText("");
 }
 
 Widget2::~Widget2()
@@ -39,13 +47,37 @@ void Widget2::move(){
     Movement(R1, *bodies[0]);
     Movement(R2, *bodies[1]);
     Movement(R3, *bodies[2]);
+    QString x1;
+    QString y1;
+    QString x2;
+    QString y2;
+    QString x3;
+    QString y3;
+    x1.setNum(bodies[0]->GetCoordinates().x,'f',3);
+    y1.setNum(bodies[0]->GetCoordinates().y,'f',3);
+    x2.setNum(bodies[1]->GetCoordinates().x,'f',3);
+    y2.setNum(bodies[1]->GetCoordinates().y,'f',3);
+    x3.setNum(bodies[2]->GetCoordinates().x,'f',3);
+    y3.setNum(bodies[2]->GetCoordinates().y,'f',3);
+    ui->label1->setText(x1);
+    ui->label2->setText(x2);
+    ui->label3->setText(x3);
+    ui->label4->setText(y1);
+    ui->label5->setText(y2);
+    ui->label6->setText(y3);
     //qDebug() << bodies[0]->GetCoordinates().x << bodies[0]->GetCoordinates().y;
     //qDebug() << bodies[1]->GetCoordinates().x << bodies[1]->GetCoordinates().y;
     //qDebug() << bodies[2]->GetCoordinates().x << bodies[2]->GetCoordinates().y;
+    for(auto& i : bodies){
+        if(i->collidingItems().size() > 1){
+            timer->stop();
+        }
+    }
 }
 
 void Widget2::on_pushButton_clicked()
 {
+    bodies.clear();
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
     scene->setSceneRect(0,0,ui->graphicsView->width(),ui->graphicsView->height());
@@ -70,7 +102,6 @@ void Widget2::on_pushButton_clicked()
 
 void Widget2::on_pushButton_2_clicked()
 {
-    QTimer* timer = new QTimer();
     if(scene->items().size() != 0)
     {
         connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -86,11 +117,11 @@ void Widget2::on_pushButton_2_clicked()
 void Widget2::on_pushButton_3_clicked()
 {
     for(auto&i : scene->items()){
-        if(i->x() > this->width()){
-            this -> resize(int(i->x() + 50), this->height());
+        if(i->x() > this->ui->graphicsView->width()){
+            this -> resize(int(i->x() + 300), this->height());
         }
         if(i->y() > this->ui->graphicsView->height()){
-            this -> resize(this->width(), int(i->y() + 150));
+            this -> resize(this->width(), int(i->y() + 200));
         }
     }
 }
