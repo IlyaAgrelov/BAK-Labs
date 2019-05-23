@@ -10,6 +10,7 @@
 #include "point.h"
 
 
+
 Spring::Spring(const double& c, const double& x){
         setPixmap(QPixmap(":/images/spring.png"));
         k = c;
@@ -134,8 +135,8 @@ void Spring::fixate(QGraphicsItem *item, int i){
         item->setPos(this->x()+39,this->y()+(512 - 40)*scaley);
         item->setFlag(QGraphicsItem::ItemIsMovable,false);
     } else if (i == 2){
-        item->setPos(this->x()+39,this->y() - 45 + (30*scaley));
-        item->setFlag(QGraphicsItem::ItemIsMovable,false);
+        this->setPos(item->x()-39,item->y() + 45 - (30*scaley));
+        this->setFlag(QGraphicsItem::ItemIsMovable,false);
     }
 }
 
@@ -163,14 +164,3 @@ void Spring::move(const Vector& v) {
         r = r + v;
         l = sqrt((p.x - r.x) * (p.x - r.x) + (p.y - r.y) * (p.y - r.y));
     }
-
-
-
-
-
-
-
-
-
-
-
