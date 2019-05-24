@@ -34,6 +34,7 @@ public:
     bool fixed1;
     bool fixed2;
     bool coll();
+    Vector dr;
 public slots:
     //void move(); //движение пружинки
 

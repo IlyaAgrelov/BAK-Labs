@@ -3,9 +3,11 @@
 #include "point.h"
 #include "widget.h"
 #include "load.h"
+#include <QGraphicsSceneMouseEvent>
 
 Point :: Point() {
     m = 0;
+    angle = 0;
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(col()));
     timer->start(1);
@@ -18,9 +20,10 @@ Point :: Point(double p, double v, double u, double V1 = 0, double V2 = 0) {
     Vector q(V1, V2);
     r = t;
     V = q;
+    angle = 0;
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(col()));
-    timer->start(1);
+    timer->start(0);
 }
 
 
@@ -51,13 +54,13 @@ void Point :: Move(const Vector& dr) {
     for(auto &y : s) {
         y->move(dr);
     }
+    //if (s.size() == 0)
+        //this->setPos(r.x, r.y);
 }
-
 
 Vector Point :: Movement(double dt) {
     double g = 9.8;
     Vector a = Force(g);
-   // a = a - (V.abs() * 0.00001) * V;
     a = a / m;
     Vector V1 = V;
     V =  V + dt * a;
@@ -76,19 +79,24 @@ Vector Point :: Force(double g) {
 }
 
 
-void Point::move(){
-    Vector v = this->Movement(0.00012);
-    this->Move(v);
-    for(auto& a: s){
-         a->deform(v.y);
-    }
+void Point::rotation(double a){
+        double sina = sin(a);
+        double cosa = cos(a);
+        QTransform transform(cosa, sina, -sina, cosa, 0, 0);
+        setTransform(transform);
 }
 
-
-void Point::col(){
+void Point::col() {
     for(auto& i: springs) {
         if(i->coll()) {
             this->hook(i);
         }
+    }
+}
+
+void Point::mousePressEvent(QGraphicsSceneMouseEvent* event){
+    if(event->button() == Qt::RightButton){
+        angle = 1.57;
+        rotation(1.57);
     }
 }

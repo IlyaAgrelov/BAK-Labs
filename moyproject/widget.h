@@ -23,6 +23,9 @@ public:
     ~Widget();
     void mousePressEvent(QMouseEvent* event);
 
+public slots:
+    void move();
+
 
 private slots:
     void on_pushButton_clicked();
@@ -34,8 +37,9 @@ private:
     vector<Point*> points;
     Ui::Widget *ui;
     QGraphicsScene *scene;
-    int amount;
+    double amount;
     QTimer* timer;
+    bool moved;
 };
 
 #endif // WIDGET_H

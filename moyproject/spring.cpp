@@ -29,7 +29,7 @@ Spring::Spring(const double& c, const double& x){
         fixed1 = false;
         fixed2 = false;
         scaley = x/512;
-        scalex = 0.25;
+        scalex = 0.19;
         fixator1 = new QGraphicsRectItem(this);
         fixator1->setRect(0,0,10/scalex,10/scaley);
         fixator1->setBrush(Qt::blue);
@@ -67,6 +67,7 @@ void Spring::deform(const double &dx){
         fixator1->setRect(0,0,10/scalex,10/scaley);
         fixator2->setRect(0,0,10/scalex,10/scaley);
         fixator2->setPos(240,-5 + 45*scaley);
+        dr = Vector(0,0);
 }
 
 
@@ -139,13 +140,15 @@ bool Spring::coll(){
 
 
 void Spring::fixate(QGraphicsItem *item, int i){
-    if(i == 1){
-        item->setPos(this->x()+39,this->y()+(512 - 40)*scaley);
-        item->setFlag(QGraphicsItem::ItemIsMovable,false);
-    } else if (i == 2){
-        this->setPos(item->x()-39,item->y() + 45 - (30*scaley));
-        this->setFlag(QGraphicsItem::ItemIsMovable,false);
-    }
+    if (angle == 0.0) {
+            if(i == 1){
+                item->setPos(this->x()+24,this->y()+(512 - 40)*scaley);
+                item->setFlag(QGraphicsItem::ItemIsMovable,false);
+            } else if (i == 2){
+                this->setPos(item->x()-24,item->y() + 45 - (30*scaley));
+                this->setFlag(QGraphicsItem::ItemIsMovable,false);
+            }
+        }
 }
 
 
@@ -170,6 +173,7 @@ void Spring::mousePressEvent(QGraphicsSceneMouseEvent* event){
 
 void Spring::move(const Vector& v) {
         r = r + v;
+        dr = dr + v;
         l = sqrt((p.x - r.x) * (p.x - r.x) + (p.y - r.y) * (p.y - r.y));
     }
 
