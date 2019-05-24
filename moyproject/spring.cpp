@@ -32,11 +32,11 @@ Spring::Spring(const double& c, const double& x){
         scalex = 0.25;
         fixator1 = new QGraphicsRectItem(this);
         fixator1->setRect(0,0,10/scalex,10/scaley);
-        fixator1->setBrush(Qt::red);
+        fixator1->setBrush(Qt::blue);
         fixator1->setPos(240,480);
         fixator2 = new QGraphicsRectItem(this);
         fixator2->setRect(0,0,10/scalex,10/scaley);
-        fixator2->setBrush(Qt::red);
+        fixator2->setBrush(Qt::blue);
         fixator2->setPos(240,5 - 30*scaley);
         setTransform(QTransform().scale(scalex,scaley));
         setFlag(QGraphicsItem::ItemIsMovable);
@@ -105,10 +105,14 @@ Vector Spring :: force() {
 bool Spring::coll(){
     if(fixator1->collidingItems().size() !=0 and not fixed1){
         for(QGraphicsItem* j : fixator1->collidingItems()){
-            if(j != this){
-                fixate(j,1);
-                fixed1 = true;
-                item1 = j;
+            if(j ->type() == 65537){
+                Load*k = dynamic_cast<Load*>(j);
+                if(not k->fixed1){
+                    fixate(k,1);
+                    fixed1 = true;
+                    k->fixed1 = true;
+                    item1 = k;
+                }
             }
         }
         return true;
@@ -116,10 +120,14 @@ bool Spring::coll(){
         fixate(item1,1);
     } if(this->fixator2->collidingItems().size() !=0 and not fixed2){
         for(QGraphicsItem* j : fixator2->collidingItems()){
-            if(j != this){
-                fixate(j,2);
-                fixed2 = true;
-                item2 = j;
+            if(j ->type() == 65537){
+                Load*k = dynamic_cast<Load*>(j);
+                if(not k->fixed2){
+                    fixate(k,2);
+                    fixed2 = true;
+                    k->fixed2 = true;
+                    item2 = k;
+                }
             }
         }
         return true;
@@ -164,3 +172,4 @@ void Spring::move(const Vector& v) {
         r = r + v;
         l = sqrt((p.x - r.x) * (p.x - r.x) + (p.y - r.y) * (p.y - r.y));
     }
+

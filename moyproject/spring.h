@@ -46,7 +46,6 @@ private:
 
     double scaley; //масштаб по y
     double scalex; //масштаб по x
-
     QGraphicsRectItem* fixator1;
     QGraphicsRectItem* fixator2;
     int angle;

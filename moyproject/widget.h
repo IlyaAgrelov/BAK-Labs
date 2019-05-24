@@ -8,6 +8,7 @@
 #include <point.h>
 #include <spring.h>
 #include <vector>
+#include <QTimer>
 
 namespace Ui {
 class Widget;
@@ -34,6 +35,7 @@ private:
     Ui::Widget *ui;
     QGraphicsScene *scene;
     int amount;
+    QTimer* timer;
 };
 
 #endif // WIDGET_H

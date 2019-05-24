@@ -19,6 +19,7 @@ Widget::Widget(QWidget *parent) :
     ui->graphicsView->setInteractive(true);
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
+    timer = new QTimer();
     amount = 0;
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -34,10 +35,10 @@ Widget::~Widget()
 
 void Widget::on_pushButton_clicked() //движение
 {
+    timer -> stop();
     springs[0]->fix(500, 500);
     //points[0]->hook(springs[0]);
     for(Point* point: points) {
-        QTimer* timer = new QTimer();
         if(scene->items().size() != 0)
         {
             connect(timer, SIGNAL(timeout()), point, SLOT(move()));
