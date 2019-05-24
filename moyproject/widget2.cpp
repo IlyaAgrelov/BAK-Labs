@@ -77,7 +77,14 @@ void Widget2::move(){
 
 void Widget2::on_pushButton_clicked()
 {
+    timer->stop();
     bodies.clear();
+    ui->label1->setText("");
+    ui->label2->setText("");
+    ui->label3->setText("");
+    ui->label4->setText("");
+    ui->label5->setText("");
+    ui->label6->setText("");
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
     scene->setSceneRect(0,0,ui->graphicsView->width(),ui->graphicsView->height());
@@ -117,11 +124,19 @@ void Widget2::on_pushButton_2_clicked()
 void Widget2::on_pushButton_3_clicked()
 {
     for(auto&i : scene->items()){
+        if(i->x() < 0){
+            scene->setSceneRect(i->x() - 10, this->ui->graphicsView->y(),
+                                this->ui->graphicsView->width(), this->ui->graphicsView->height());
+        }
         if(i->x() > this->ui->graphicsView->width()){
             this -> resize(int(i->x() + 300), this->height());
         }
         if(i->y() > this->ui->graphicsView->height()){
             this -> resize(this->width(), int(i->y() + 200));
+        }
+        if(i->y() < 0){
+            scene->setSceneRect(this->ui->graphicsView->x(), i->y() - 10,
+                           this->ui->graphicsView->width(), this->ui->graphicsView->height());
         }
     }
 }
